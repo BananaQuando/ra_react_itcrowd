@@ -5,6 +5,7 @@ import {
 import Header from './components/Header';
 import LeftSidebar from './components/LeftSidebar';
 import RightContent from './components/RightContent';
+import './css/main.css';
 
 function App() {
   return (
