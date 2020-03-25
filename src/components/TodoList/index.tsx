@@ -15,12 +15,12 @@ export default class TodoList extends Component<Props> {
     @observable todoIdList = [] as number[];
 
     async componentDidMount() {
-        await this.props.todoStore.getAllTodos();
-        const { todoList } = this.props.todoStore;
+        await this.props.todoStore.getUserTodos(1);
+        const { userTodoList } = this.props.todoStore;
 
-        for (const id in todoList) {
-            if (todoList.hasOwnProperty(id)) {
-                const todo = todoList[id];
+        for (const id in userTodoList) {
+            if (userTodoList.hasOwnProperty(id)) {
+                const todo = userTodoList[id];
 
                 this.todoIdList.push(todo.id);
             }

@@ -25,7 +25,7 @@ export default class TodoListItem extends Component<Props, State> {
     }
 
     async componentDidMount() {
-        this.todoItem = await this.props.todoStore!.getTodo(this.props.todoId);
+        this.todoItem = await this.props.todoStore!.getUserTodo(this.props.todoId);
 
         switch (this.todoItem.status) {
             case 1:

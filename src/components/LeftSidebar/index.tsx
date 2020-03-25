@@ -49,7 +49,7 @@ export default class LeftSidebar extends Component {
                                 </Link>
                                 <ul>
                                     <li>
-                                        <Link to="todo-list" className="mm-active">
+                                        <Link to="/todo-list" className="mm-active">
                                             <i className="metismenu-icon">
                                             </i>Todo list
                                         </Link>

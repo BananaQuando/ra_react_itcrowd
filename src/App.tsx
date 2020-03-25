@@ -10,10 +10,12 @@ import './css/main.css';
 function App() {
   return (
     <Router>
-      <Header />
-      <div className="app-main">
-        <LeftSidebar />
-        <RightContent />
+      <div className="app-container fixed-header fixed-sidebar body-tabs-shadow app-theme-gray">
+        <Header />
+        <div className="app-main">
+          <LeftSidebar />
+          <RightContent />
+        </div>
       </div>
     </Router>
   );
