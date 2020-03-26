@@ -36842,6 +36842,10 @@ button.toast-close-button {
   background: #fff slick-image-url("/assets/images/ajax-loader.gif") center center no-repeat
 }
 
+.public-DraftStyleDefault-block {
+	margin: 0px !important;
+}
+
 .slick-prev,
 .slick-next {
   position: absolute;

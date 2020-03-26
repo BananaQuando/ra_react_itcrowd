@@ -10,31 +10,16 @@ interface RouteProps {
     todoId: string
 }
 
-interface Props extends RouteComponentProps<RouteProps> {
-    todoStore?: ITodoStore,
-}
+interface Props extends RouteComponentProps<RouteProps> {}
 
-@inject("todoStore")
 @observer
 export default class TodoForm extends Component<Props> {
-
-    @observable todoItem = {} as ITodoValues;
-
-    @observable async componentWillMount() {
-        const { todoId: todoID } = this.props.match.params;
-        if (todoID) {
-            this.todoItem = await this.props.todoStore?.getUserTodo(todoID);
-        }
-    }
-    
-
-    // TODO: Переделать на передеачу id
-
     render() {
+        const { todoId: todoID } = this.props.match.params;
         return (
             <>
-                <TodoFormHeader todoItem={this.todoItem} />
-                <TodoFormBody />
+                <TodoFormHeader todoID={todoID} />
+                <TodoFormBody todoID={todoID} />
             </>
         );
     }

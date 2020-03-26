@@ -1,32 +1,35 @@
 import React, { Component } from 'react';
-import { ITodo } from '../../stores/TodoStore/interfaces';
+import { ITodoValues, ITodoStore } from '../../stores/TodoStore/interfaces';
 import { observable, action } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 interface Props {
-    todoItem: ITodo,
+    todoStore?: ITodoStore,
+    todoID?: string
 }
 
+@inject("todoStore")
 @observer
 export default class TodoFormHeader extends Component<Props> {
 
-    @observable todoItem = {} as ITodo;
+    @observable todoItem = {
+        title: "Default value",
+        description: "Default value",
+    } as ITodoValues;
 
-    @action changeInputs(evt: { target: { name: string, value: string } }) {
+    @action changeInputs(evt: any) {
         const { name, value } = evt.target;
 
-        this.todoValues[name] = value;
+        this.todoItem[name] = value;
     }
 
-    @observable componentDidMount(){
-
-        const { todoItem } = this.props;
-
-        this.todoValues = todoItem;
+    async componentDidMount() {
+        if (this.props.todoID) {
+            this.todoItem = await this.props.todoStore?.getUserTodo(this.props.todoID);
+        }
     }
 
     render() {
-
 
         return (
             <div className="app-page-title">
@@ -40,16 +43,16 @@ export default class TodoFormHeader extends Component<Props> {
                             <input
                                 className="field__inherit"
                                 type="text"
-                                name="todoTitle"
-                                value={this.todoValues.title}
+                                name="title"
+                                value={this.todoItem.title}
                                 onChange={e => this.changeInputs(e)}
                             />
                             <div className="page-title-subheading">
                                 <input
                                     className="field__inherit"
                                     type="text"
-                                    name="tododescription"
-                                    value={this.todoValues.description}
+                                    name="description"
+                                    value={this.todoItem.description}
                                     onChange={e => this.changeInputs(e)}
                                 />
                             </div>
