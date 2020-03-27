@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Breadcrumbs from '../Breadcrumbs';
 
 export default class Header extends Component {
     render() {
@@ -37,6 +38,9 @@ export default class Header extends Component {
                     </span>
                 </div>
                 <div className="app-header__content">
+                    <div className="app-header-left">
+                        <Breadcrumbs />
+                    </div>
                     <div className="app-header-right">
                         <div className="header-btn-lg">
                             <button type="button" className="hamburger hamburger--elastic open-right-drawer">

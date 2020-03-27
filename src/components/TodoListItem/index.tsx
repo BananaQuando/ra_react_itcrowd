@@ -21,7 +21,7 @@ export default class TodoListItem extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
-        this.state = {statusClass: 'bg-focus'};
+        this.state = { statusClass: 'bg-focus' };
     }
 
     async componentDidMount() {
@@ -56,7 +56,7 @@ export default class TodoListItem extends Component<Props, State> {
     }
 
     render() {
-        const { id, title, status, create_date } = this.todoItem;
+        const { id, title, description, status, create_date } = this.todoItem;
 
         return (
             <li className="list-group-item">
@@ -79,10 +79,11 @@ export default class TodoListItem extends Component<Props, State> {
                                     {title}
                                 </Link>
                             </div>
+                            <div className="widget-subheading">{description}</div>
                         </div>
                     </div>
                 </div>
-            </li>
+            </li >
         );
     }
 }

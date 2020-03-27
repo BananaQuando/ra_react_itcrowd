@@ -10,7 +10,7 @@ import './css/main.css';
 function App() {
   return (
     <Router>
-      <div className="app-container fixed-header fixed-sidebar body-tabs-shadow app-theme-gray">
+      <div className="app-container fixed-header fixed-sidebar body-tabs-shadow app-theme-white">
         <Header />
         <div className="app-main">
           <LeftSidebar />

@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import TodoList from '../TodoList';
 import TodoForm from '../TodoForm';
+import { Breadcrumb } from 'react-breadcrumbs';
 
 export default class RightContent extends Component {
     render() {
@@ -13,7 +14,8 @@ export default class RightContent extends Component {
                 <div className="app-main__inner">
                     <Switch>
                         <Route path="/todo-list" exact component={TodoList} />
-                        <Route path="/todo-list/:todoId" component={TodoForm} />
+                        <Route path="/todo-list/create-todo" exact component={TodoForm} />
+                        <Route path="/todo-list/:todoId" exact component={TodoForm} />
                     </Switch>
                 </div>
             </div>

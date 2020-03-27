@@ -17,7 +17,7 @@ export default class TodoFormHeader extends Component<Props> {
         description: "Default value",
     } as ITodoValues;
 
-    @action changeInputs(evt: any) {
+    @action async changeInputs(evt: any) {
         const { name, value } = evt.target;
 
         this.todoItem[name] = value;
@@ -30,7 +30,6 @@ export default class TodoFormHeader extends Component<Props> {
     }
 
     render() {
-
         return (
             <div className="app-page-title">
                 <div className="page-title-wrapper">
@@ -56,6 +55,11 @@ export default class TodoFormHeader extends Component<Props> {
                                     onChange={e => this.changeInputs(e)}
                                 />
                             </div>
+                        </div>
+                    </div>
+                    <div className="page-title-actions">
+                        <div className="position-relative">
+                            <input name="time_spent" id="timeSpent" placeholder="Spent time on task" type="text" className="form-control" />
                         </div>
                     </div>
                 </div>

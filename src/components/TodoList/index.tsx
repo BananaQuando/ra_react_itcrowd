@@ -3,6 +3,7 @@ import TodoListItem from '../TodoListItem';
 import TodoStore from '../../stores/TodoStore';
 import { inject, observer } from 'mobx-react';
 import { observable } from 'mobx';
+import { Link } from 'react-router-dom';
 
 interface Props {
     todoStore: TodoStore,
@@ -51,8 +52,8 @@ export default class TodoList extends Component<Props> {
                                 </div>
                             </div>
                         </div>
-                        <div className="d-block text-right card-footer">
-                            <button className="btn btn-primary">Add Task</button>
+                        <div className="d-block text-left card-footer">
+                            <Link to="/todo-list/create-todo" className="btn btn-primary">Add Task</Link>
                         </div>
                     </div>
                 </div>

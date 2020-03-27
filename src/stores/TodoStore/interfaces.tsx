@@ -3,8 +3,8 @@ export interface ITodoStore {
     userTodoList: ITodosList,
     getAllTodos: Function,
     getUserTodos: Function,
-    getTodo: Function
-    getUserTodo: Function
+    getTodo: Function,
+    getUserTodo: Function, 
 }
 
 export interface ITodosList {
