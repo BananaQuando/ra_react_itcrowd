@@ -5,7 +5,6 @@ import {
 } from "react-router-dom";
 import TodoList from '../TodoList';
 import TodoForm from '../TodoForm';
-import { Breadcrumb } from 'react-breadcrumbs';
 
 export default class RightContent extends Component {
     render() {

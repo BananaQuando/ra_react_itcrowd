@@ -5,10 +5,11 @@ export interface ITodoStore {
     getUserTodos: Function,
     getTodo: Function,
     getUserTodo: Function, 
+    createTodo: Function
 }
 
 export interface ITodosList {
-    [key: number]: ITodo
+    [key: string]: ITodo
 }
 
 export interface ITodo {

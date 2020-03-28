@@ -72,4 +72,15 @@ export default class TodoStore implements ITodoStore {
             return todo;
         }
     }
+
+    @action async createTodo(){
+        return this.userTodoList['new-todo'] = {
+            id: Math.random() * 10000,
+            title: "",
+            text: "",
+            create_date: new Date("2018-03-16"),
+            status: 0, 
+            description: ""
+        };
+    }
 }
