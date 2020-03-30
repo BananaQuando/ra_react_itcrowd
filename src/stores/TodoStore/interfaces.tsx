@@ -1,24 +1,32 @@
 export interface ITodoStore {
     todoList: ITodosList,
-    userTodoList: ITodosList,
+    userTodosId: IUserTodosId,
     getAllTodos: Function,
     getUserTodos: Function,
     getTodo: Function,
-    getUserTodo: Function, 
-    createTodo: Function
+    createTodo: Function,
+    changeTodo: Function,
+    removeTodo: Function
 }
 
 export interface ITodosList {
     [key: string]: ITodo
 }
 
+export interface IUserTodosId {
+    [key: string]: number[]
+}
+
 export interface ITodo {
     id: number,
+    user_id: number,
     title: string,
     text: string,
-    create_date: Date,
+    description: string,
     status: number,
-    description: string
+    remember_token: string,
+    created_at: Date,
+    updated_at: Date,
 }
 
 export interface ITodoValues {

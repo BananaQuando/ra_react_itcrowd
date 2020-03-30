@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import { ITodo, ITodoStore } from '../../stores/TodoStore/interfaces';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
 interface Props {
     todoStore?: ITodoStore,
-    todoId: number,
+    todoID: number,
 }
 
 interface State {
@@ -25,7 +25,7 @@ export default class TodoListItem extends Component<Props, State> {
     }
 
     async componentDidMount() {
-        this.todoItem = await this.props.todoStore!.getUserTodo(this.props.todoId);
+        this.todoItem = await this.props.todoStore!.getTodo(this.props.todoID);
 
         switch (this.todoItem.status) {
             case 1:
@@ -55,8 +55,12 @@ export default class TodoListItem extends Component<Props, State> {
         }
     }
 
+    @action async removeTodo(){
+        await this.props.todoStore!.removeTodo(this.todoItem.id);
+    }
+
     render() {
-        const { id, title, description, status, create_date } = this.todoItem;
+        const { id, title, description } = this.todoItem;
 
         return (
             <li className="list-group-item">
@@ -80,6 +84,13 @@ export default class TodoListItem extends Component<Props, State> {
                                 </Link>
                             </div>
                             <div className="widget-subheading">{description}</div>
+                        </div>
+                        <div className="widget-content-right">
+                            <button 
+                                className="border-0 btn-transition btn btn-outline-danger"
+                                onClick={() => this.removeTodo()}>
+                                <i className="fa fa-trash-alt"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
