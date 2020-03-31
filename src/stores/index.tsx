@@ -1,4 +1,5 @@
 import TodoStore from './TodoStore';
+import InputDataStore from './InputDataStore';
 import CustomEditorStore from './CustomEditorStore';
 
 interface Stores {
@@ -7,5 +8,6 @@ interface Stores {
 
 export const stores: Stores = {
     todoStore: new TodoStore(),
-    customEditorStore: new CustomEditorStore()
+    customEditorStore: new CustomEditorStore(),
+    inputDataStore: new InputDataStore()
 }

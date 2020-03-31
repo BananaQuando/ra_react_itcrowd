@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ITodoValues, ITodoStore } from '../../stores/TodoStore/interfaces';
 import { observable, action } from 'mobx';
 import { observer, inject } from 'mobx-react';
+import CustomTextInput from '../CustomTextInput';
 
 interface Props {
     todoStore?: ITodoStore,
@@ -12,15 +13,15 @@ interface Props {
 @observer
 export default class TodoFormHeader extends Component<Props> {
 
-    @action async changeInputs(evt: any) {
-        const { name, value } = evt.target;
+    // @action async changeInputs(evt: any) {
+    //     const { name, value } = evt.target;
 
-        this.props.todoItem[name] = value;
-    }
+    //     this.props.todoItem[name] = value;
+    // }
 
-    @action async updateTodo(evt: any){
-        await this.props.todoStore!.changeTodo(this.props.todoItem.id);
-    }
+    // @action async updateTodo(evt: any){
+    //     await this.props.todoStore!.changeTodo(this.props.todoItem.id);
+    // }
 
     render() {
         return (
@@ -31,7 +32,11 @@ export default class TodoFormHeader extends Component<Props> {
                             <i className="pe-7s-box2 icon-gradient bg-plum-plate"></i>
                         </div>
                         <div>
-                            <input
+                            <CustomTextInput 
+                                content={this.props.todoItem.title} 
+                                inputID={`todo_${this.props.todoItem.id}_test`}
+                            />
+                            {/* <input
                                 className="field__inherit"
                                 type="text"
                                 name="title"
@@ -48,7 +53,7 @@ export default class TodoFormHeader extends Component<Props> {
                                     onChange={e => this.changeInputs(e)}
                                     onBlur={(e) => this.updateTodo(e)}
                                 />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="page-title-actions">
