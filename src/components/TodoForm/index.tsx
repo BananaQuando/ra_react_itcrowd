@@ -20,10 +20,7 @@ interface Props extends RouteComponentProps<Props & RouteProps> { }
 @observer
 export default class TodoForm extends Component<Props> {
 
-    @observable todoItem = {
-        title: "Default title",
-        description: "Default description",
-    } as ITodoValues;
+    @observable todoItem = {} as ITodoValues;
 
     @action async componentDidMount(){
         const { todoId: todoID } = this.props.match.params;
@@ -31,15 +28,15 @@ export default class TodoForm extends Component<Props> {
         if (todoID) {
             this.todoItem = await this.props.todoStore!.getTodo(todoID);
         } else {
-            // this.todoItem = await this.props.todoStore!.createTodo();
+            this.todoItem = await this.props.todoStore!.createTodo(2);
         }
     }
 
     render() {
         return (
             <>
-                <TodoFormHeader todoItem={this.todoItem} />
-                <TodoFormBody todoItem={this.todoItem} />
+                { this.todoItem.id ? <TodoFormHeader todoItem={this.todoItem} /> : ''}
+                { this.todoItem.id ? <TodoFormBody todoItem={this.todoItem} /> : ''}
             </>
         );
     }

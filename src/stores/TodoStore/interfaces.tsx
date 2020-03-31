@@ -3,6 +3,7 @@ export interface ITodoStore {
     userTodosId: IUserTodosId,
     getAllTodos: Function,
     getUserTodos: Function,
+    getUserTodosID: Function,
     getTodo: Function,
     createTodo: Function,
     changeTodo: Function,

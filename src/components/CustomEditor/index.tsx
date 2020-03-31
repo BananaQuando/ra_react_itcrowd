@@ -11,16 +11,19 @@ interface Props {
     editorID: string | number,
     content?: string,
     customEditorStore?: ICustomEditorStore,
-    customEditorItem?: ICustomEditorItem
+    customEditorItem?: ICustomEditorItem,
+    onChange?: Function
 }
 
-@inject('customEditorStore')
+@inject('customEditorStore', 'todoStore')
 @observer
 export default class CustomEditor extends React.Component<Props> {
 
     @observable editorState = EditorState.createEmpty();
     @observable customEditorItem = {} as ICustomEditorItem
     @observable editorHtmlContent = this.props.content;
+    @observable onChange = this.props.onChange ? this.props.onChange : () => {}
+
     editorStyle = {
         border: "none",
         padding: "10px",
@@ -28,9 +31,10 @@ export default class CustomEditor extends React.Component<Props> {
     }
 
     @action onEditorStateChange = (_editorState: any) => {
-
         this.editorState = _editorState;
         this.customEditorItem.editorContent = this.convertToHtml(_editorState);
+        this.editorHtmlContent = this.convertToHtml(_editorState)
+        this.onChange(this.editorHtmlContent)
     };
 
     @action async componentDidMount() {

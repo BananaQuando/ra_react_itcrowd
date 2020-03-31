@@ -4,7 +4,7 @@ import TodoStore from '../../stores/TodoStore';
 import { inject, observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 import { Link } from 'react-router-dom';
-import { ITodo } from 'stores/TodoStore/interfaces';
+import { ITodo, IUserTodosId } from 'stores/TodoStore/interfaces';
 
 interface Props {
     todoStore: TodoStore,
@@ -15,23 +15,15 @@ interface Props {
 export default class TodoList extends Component<Props> {
 
     @observable todoIdList = [] as number[];
-    @observable todoList = [] as ITodo[];
+    @observable userTodosID = [] as number[];
 
     @action async componentDidMount() {
         //  передавать id пользователей
-        this.todoList = await this.props.todoStore.getUserTodos(2);
-
-        for (const id in this.todoList) {
-            if (this.todoList.hasOwnProperty(id)) {
-                const todo = this.todoList[id];
-
-                this.todoIdList.push(todo.id);
-            }
-        }
+        this.userTodosID = await this.props.todoStore.getUserTodosID(2);
     }
 
     render() {
-        const listItems = this.props.todoStore.userTodosId[2] ? this.props.todoStore.userTodosId[2].map((id) => {
+        const listItems = this.userTodosID ? this.userTodosID.map((id) => {
             return <TodoListItem key={id} todoID={id} />
         }) : '';
 

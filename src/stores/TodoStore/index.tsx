@@ -22,23 +22,37 @@ export default class TodoStore implements ITodoStore {
         return Promise.all(list.map(async (id) => await this.getTodo(id)))
     }
 
+    async requestGetUserTodos(userID: number) {
+        this.userTodosId[userID] = [] as number[];
+        console.log(`return userTodos from request`);
+        const response = await fetch(`http://127.0.0.1:8000/api/tasks?user_id=${userID}`);
+        const data = await response.json();
+
+        data.forEach(async (el: ITodo) => {
+            const todo = this.formatTodoResponce(el);
+            this.userTodosId[userID].push(el.id);
+            if (!this.todoList[todo.id]) {
+                this.todoList[todo.id] = todo;
+            }
+        });
+
+        return this.userTodosId;
+    }
+
+    @action async getUserTodosID(userID: number) {
+        if (this.userTodosId[userID]) {
+            return this.userTodosId[userID];
+        } else {
+            await this.requestGetUserTodos(userID);
+            return this.userTodosId[userID];
+        }
+    }
+
     @action async getUserTodos(userID: number) {
         if (this.userTodosId[userID]) {
             return await this.fetchUserTodos(this.userTodosId[userID]);;
         } else {
-            this.userTodosId[userID] = [] as number[];
-            console.log(`return userTodos from request`);
-            const response = await fetch(`http://127.0.0.1:8000/api/tasks?user_id=${userID}`);
-            const data = await response.json();
-
-            data.forEach(async (el: ITodo) => {
-                const todo = this.formatTodoResponce(el);
-                this.userTodosId[userID].push(el.id);
-                if (!this.todoList[todo.id]) {
-                    this.todoList[todo.id] = todo;
-                }
-                // this.userTodosList.push(todo);
-            });
+            await this.requestGetUserTodos(userID);
             return await this.fetchUserTodos(this.userTodosId[userID]);
         }
     }
@@ -70,40 +84,41 @@ export default class TodoStore implements ITodoStore {
         }
     }
 
-    @action async createTodo() {
-        return this.todoList['new-todo'] = {
-            id: Math.random() * 10000,
-            title: "",
-            user_id: 0,
-            remember_token: '0',
-            text: "",
-            created_at: new Date("2018-03-16"),
-            updated_at: new Date("2018-03-16"),
-            status: 0,
-            description: ""
-        };
+    @action async createTodo(userID: number) {
+        const request = await fetch(`http://127.0.0.1:8000/api/tasks/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: userID } as ITodo)
+        });
+        let todo = this.formatTodoResponce(await request.json());
+        if (!this.userTodosId[userID]) {
+            this.userTodosId[userID] = [] as number[];
+        }
+        this.userTodosId[userID].push(todo.id);
+        this.todoList[todo.id] = todo;
+
+        return this.todoList[todo.id];
     }
 
     @action async removeTodo(todoID?: number) {
         if (todoID) {
-            // const request = await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`, {
-            //     method: 'DELETE',
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(await this.getTodo(todoID))
-            // }).then(() => {
-            // });
-            const userID = this.todoList[todoID].user_id;
-            const index = this.userTodosId[userID].indexOf(todoID);
-            if (index > -1) {
-                this.userTodosId[userID].splice(index, 1);
-            }
-            console.log(this.userTodosId[userID]);
-            delete this.todoList[todoID];
-            delete this.userTodosList[userID];
-            console.log(this.userTodosList);
-            console.log(this.todoList[todoID]);
+            const request = await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(await this.getTodo(todoID))
+            }).then(() => {
+                const userID = this.todoList[todoID].user_id;
+                const index = this.userTodosId[userID].indexOf(todoID);
+                if (index > -1) {
+                    this.userTodosId[userID].splice(index, 1);
+                }
+                delete this.todoList[todoID];
+                delete this.userTodosList[userID];
+            });
         }
     }
 

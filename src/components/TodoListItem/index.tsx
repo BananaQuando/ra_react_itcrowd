@@ -18,60 +18,44 @@ interface State {
 export default class TodoListItem extends Component<Props, State> {
 
     @observable todoItem = {} as ITodo;
-
-    constructor(props: Props) {
-        super(props);
-        this.state = { statusClass: 'bg-focus' };
-    }
+    @observable statusClass = 'bg-focus' as string
 
     async componentDidMount() {
         this.todoItem = await this.props.todoStore!.getTodo(this.props.todoID);
 
-        switch (this.todoItem.status) {
-            case 1:
-                this.setState({
-                    statusClass: 'bg-success'
-                });
-                break;
-            case 2:
-                this.setState({
-                    statusClass: 'bg-focus'
-                });
-                break;
-            default:
-                break;
-        }
+        this.statusClass = this.todoItem.status === 1 ? 'bg-success' : 'bg-focus';
     }
 
-    completeToggle() {
-        if (this.state.statusClass != 'bg-success') {
-            this.setState({
-                statusClass: 'bg-success'
-            });
-        } else {
-            this.setState({
-                statusClass: 'bg-focus'
-            });
-        }
+    completeToggle(evt: any) {
+        // this.todoItem.status
+        let { checked } = evt.target;
+
+        checked == true ? this.todoItem.status = 1 : this.todoItem.status = 2;
+        this.statusClass = this.todoItem.status === 1 ? 'bg-success' : 'bg-focus';
+        this.props.todoStore?.changeTodo(this.todoItem.id);
     }
 
-    @action async removeTodo(){
+    @action async removeTodo() {
         await this.props.todoStore!.removeTodo(this.todoItem.id);
     }
 
     render() {
-        const { id, title, description } = this.todoItem;
+        const { id, title, description, status } = this.todoItem;
 
         return (
             <li className="list-group-item">
-                <div className={`todo-indicator ${this.state.statusClass}`}></div>
+                <div className={`todo-indicator ${this.statusClass}`}></div>
                 <div className="widget-content p-0">
                     <div className="widget-content-wrapper">
                         <div className="widget-content-left mr-2">
                             <div className="custom-checkbox custom-control">
                                 <input
-                                    type="checkbox" id={`exampleCustomCheckbox${id}`}
-                                    className="custom-control-input" onChange={() => this.completeToggle()} />
+                                    type="checkbox"
+                                    id={`exampleCustomCheckbox${id}`}
+                                    className="custom-control-input"
+                                    checked={status === 1 ? true : false}
+                                    onChange={(e) => this.completeToggle(e)}
+                                />
                                 <label
                                     className="custom-control-label"
                                     htmlFor={`exampleCustomCheckbox${id}`}>&nbsp;</label>
@@ -86,7 +70,7 @@ export default class TodoListItem extends Component<Props, State> {
                             <div className="widget-subheading">{description}</div>
                         </div>
                         <div className="widget-content-right">
-                            <button 
+                            <button
                                 className="border-0 btn-transition btn btn-outline-danger"
                                 onClick={() => this.removeTodo()}>
                                 <i className="fa fa-trash-alt"></i>
