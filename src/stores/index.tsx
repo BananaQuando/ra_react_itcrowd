@@ -1,5 +1,6 @@
 import TodoStore from './TodoStore';
 import InputDataStore from './InputDataStore';
+import NotificationsStore from './NotificationsStore';
 
 interface Stores {
     [key: string]: any
@@ -7,5 +8,6 @@ interface Stores {
 
 export const stores: Stores = {
     todoStore: new TodoStore(),
-    inputDataStore: new InputDataStore()
+    inputDataStore: new InputDataStore(),
+    notificationsStore: new NotificationsStore()
 }
