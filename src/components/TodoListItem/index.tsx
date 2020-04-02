@@ -32,7 +32,7 @@ export default class TodoListItem extends Component<Props, State> {
 
         checked == true ? this.todoItem.status = 1 : this.todoItem.status = 2;
         this.statusClass = this.todoItem.status === 1 ? 'bg-success' : 'bg-focus';
-        this.props.todoStore?.changeTodo(this.todoItem.id);
+        this.props.todoStore?.saveTodo(this.todoItem.id);
     }
 
     @action async removeTodo() {

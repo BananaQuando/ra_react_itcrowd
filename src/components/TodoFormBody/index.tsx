@@ -14,10 +14,6 @@ interface Props {
 @observer
 export default class TodoFormBody extends Component<Props> {
     @observable todoItem = {} as ITodoValues;
-    onChangeHandler = (_content: string) => {
-        // this.todoItem.text = _content;
-        this.props.todoStore!.changeTodo(this.todoItem.id);
-    }
 
     async componentDidMount(){
         if (this.props.todoItem.id){
@@ -31,7 +27,10 @@ export default class TodoFormBody extends Component<Props> {
                 <div className="card-body">
                     {
                         this.todoItem.id 
-                        ? <CustomEditor onChange={this.onChangeHandler} content={this.todoItem.text} editorID={this.todoItem.id} />
+                        ? <CustomEditor 
+                            content={this.todoItem.text} 
+                            editorID={`todo_${this.todoItem.id}_text`} 
+                        />
                         : <div className="alert alert-danger mb-2">Error can't create id</div>
                     }
                 </div>

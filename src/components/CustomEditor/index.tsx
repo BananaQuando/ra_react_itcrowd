@@ -5,24 +5,22 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import { ICustomEditorStore, ICustomEditorItem } from '../../stores/CustomEditorStore/interfaces';
+import { IInputDataStore, IInputDataItem } from '../../stores/InputDataStore/interface';
 
 interface Props {
     editorID: string | number,
     content?: string,
-    customEditorStore?: ICustomEditorStore,
-    customEditorItem?: ICustomEditorItem,
-    onChange?: Function
+    inputDataStore?: IInputDataStore,
+    inputDataItem?: IInputDataItem,
 }
 
-@inject('customEditorStore', 'todoStore')
+@inject('inputDataStore', 'todoStore')
 @observer
 export default class CustomEditor extends React.Component<Props> {
 
     @observable editorState = EditorState.createEmpty();
-    @observable customEditorItem = {} as ICustomEditorItem
+    @observable inputDataItem = {} as IInputDataItem
     @observable editorHtmlContent = this.props.content;
-    @observable onChange = this.props.onChange ? this.props.onChange : () => {}
 
     editorStyle = {
         border: "none",
@@ -32,18 +30,17 @@ export default class CustomEditor extends React.Component<Props> {
 
     @action onEditorStateChange = (_editorState: any) => {
         this.editorState = _editorState;
-        this.customEditorItem.editorContent = this.convertToHtml(_editorState);
+        this.inputDataItem.inputContent = this.convertToHtml(_editorState);
         this.editorHtmlContent = this.convertToHtml(_editorState)
-        this.onChange(this.editorHtmlContent)
     };
 
     @action async componentDidMount() {
 
         const { editorID } = this.props;
 
-        this.customEditorItem = await this.props.customEditorStore!.getEditor(editorID, this.editorHtmlContent);
+        this.inputDataItem = await this.props.inputDataStore!.getInputDataStore(editorID, this.editorHtmlContent);
 
-        this.editorState = this.convertToState(this.customEditorItem.editorContent);
+        this.editorState = this.convertToState(this.inputDataItem.inputContent);
     }
 
     @action convertToHtml(state: any) {

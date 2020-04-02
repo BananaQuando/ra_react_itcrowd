@@ -1,4 +1,4 @@
-import { ITodo, ITodoStore, ITodosList, IUserTodosId } from './interfaces';
+import { ITodo, ITodoStore, ITodosList, IUserTodosId, ITodoValues } from './interfaces';
 import { observable, action } from 'mobx';
 
 export default class TodoStore implements ITodoStore {
@@ -122,9 +122,9 @@ export default class TodoStore implements ITodoStore {
         }
     }
 
-    @action async changeTodo(todoID?: number) {
+    @action async saveTodo(todoID?: number) {
         if (todoID) {
-            const request = await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`, {
+            await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -133,4 +133,4 @@ export default class TodoStore implements ITodoStore {
             });
         }
     }
-}
+} 

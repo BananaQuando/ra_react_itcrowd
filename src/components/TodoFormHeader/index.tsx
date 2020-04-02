@@ -3,6 +3,7 @@ import { ITodoValues, ITodoStore } from '../../stores/TodoStore/interfaces';
 import { observable, action } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import CustomTextInput from '../CustomTextInput';
+import { IInputDataStore } from 'stores/InputDataStore/interface';
 
 interface Props {
     todoStore?: ITodoStore,
@@ -13,15 +14,13 @@ interface Props {
 @observer
 export default class TodoFormHeader extends Component<Props> {
 
-    // @action async changeInputs(evt: any) {
-    //     const { name, value } = evt.target;
+    @observable todoItem = {} as ITodoValues;
 
-    //     this.props.todoItem[name] = value;
-    // }
-
-    // @action async updateTodo(evt: any){
-    //     await this.props.todoStore!.changeTodo(this.props.todoItem.id);
-    // }
+    async componentDidMount() {
+        if (this.props.todoItem.id){
+            this.todoItem = await this.props.todoStore?.getTodo(this.props.todoItem.id);
+        }
+    }
 
     render() {
         return (
@@ -31,29 +30,19 @@ export default class TodoFormHeader extends Component<Props> {
                         <div className="page-title-icon">
                             <i className="pe-7s-box2 icon-gradient bg-plum-plate"></i>
                         </div>
-                        <div>
-                            <CustomTextInput 
-                                content={this.props.todoItem.title} 
-                                inputID={`todo_${this.props.todoItem.id}_test`}
-                            />
-                            {/* <input
-                                className="field__inherit"
-                                type="text"
-                                name="title"
-                                value={this.props.todoItem.title}
-                                onChange={e => this.changeInputs(e)}
-                                onBlur={(e) => this.updateTodo(e)}
+                        <div >
+                            <CustomTextInput
+                                content={this.props.todoItem.title}
+                                inputID={`todo_${this.props.todoItem.id}_title`}
+                                name='title'
                             />
                             <div className="page-title-subheading">
-                                <input
-                                    className="field__inherit"
-                                    type="text"
-                                    name="description"
-                                    value={this.props.todoItem.description}
-                                    onChange={e => this.changeInputs(e)}
-                                    onBlur={(e) => this.updateTodo(e)}
+                                <CustomTextInput
+                                    content={this.props.todoItem.description}
+                                    inputID={`todo_${this.props.todoItem.id}_description`}
+                                    name='description'
                                 />
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                     <div className="page-title-actions">

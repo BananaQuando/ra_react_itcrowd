@@ -6,8 +6,8 @@ export interface ITodoStore {
     getUserTodosID: Function,
     getTodo: Function,
     createTodo: Function,
-    changeTodo: Function,
-    removeTodo: Function
+    saveTodo: Function,
+    removeTodo: Function,
 }
 
 export interface ITodosList {
