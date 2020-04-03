@@ -3,16 +3,19 @@ export interface INotificationsStore {
     addNotification: Function,
     getNotifications: Function,
     getNotification: Function,
-
+    getNotificationIDs: Function,
+    removeNotification: Function
 }
 
 export interface INotificationList {
-    [key: number] : INotificationItem
+    [key: string] : INotificationItem
 }
 
 export interface INotificationItem{
-    name: string,
+    id: number,
+    name?: string,
     text: string,
     type: string,
-    duration: number
+    status?: number,
+    duration?: number
 }

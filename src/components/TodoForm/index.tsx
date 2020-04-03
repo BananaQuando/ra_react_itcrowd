@@ -6,6 +6,7 @@ import TodoFormBody from '../TodoFormBody';
 import { RouteComponentProps } from 'react-router-dom';
 import { observable, action } from 'mobx';
 import { IInputDataStore } from 'stores/InputDataStore/interface';
+import { INotificationsStore } from 'stores/NotificationsStore/interface';
 
 interface RouteProps {
     todoId: string,
@@ -13,12 +14,13 @@ interface RouteProps {
 
 interface Props {
     todoStore?: ITodoStore,
-    inputDataStore?: IInputDataStore
+    inputDataStore?: IInputDataStore,
+    notificationsStore?: INotificationsStore
 }
 
 interface Props extends RouteComponentProps<Props & RouteProps> { }
 
-@inject("todoStore", "inputDataStore")
+@inject("todoStore", "inputDataStore", "notificationsStore")
 @observer
 export default class TodoForm extends Component<Props> {
 
@@ -54,6 +56,12 @@ export default class TodoForm extends Component<Props> {
         this.todoItem.text = await this.getInputValue("text");
 
         await this.props.todoStore?.saveTodo(this.todoItem.id);
+        await this.props.notificationsStore!.addNotification({
+            id: this.todoItem.id,
+            text: "Успешно сохранено",
+            type: "toast-success",
+            duration: 2000
+        });
     }
 
     render() {
