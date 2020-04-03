@@ -58,7 +58,7 @@ export default class TodoForm extends Component<Props> {
         await this.props.todoStore?.saveTodo(this.todoItem.id);
         await this.props.notificationsStore!.addNotification({
             id: this.todoItem.id,
-            text: "Успешно сохранено",
+            text: `Задача #${this.todoItem.id} успешно сохранена`,
             type: "toast-success",
             duration: 2000
         });

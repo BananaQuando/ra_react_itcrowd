@@ -42,6 +42,28 @@ export default class Header extends Component {
                         <Breadcrumbs />
                     </div>
                     <div className="app-header-right">
+                        <div className="header-btn-lg pr-0">
+                            <div className="widget-content p-0">
+                                <div className="widget-content-wrapper">
+                                    <div className="widget-content-left">
+                                        <div className="btn-group">
+                                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" className="p-0 btn">
+                                                <img width="42" className="rounded-circle" src="/assets/images/avatars/1.jpg" alt="" />
+                                                <i className="fa fa-angle-down ml-2 opacity-8"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div className="widget-content-left  ml-3 header-user-info">
+                                        <div className="widget-heading">
+                                            Alina Mclourd
+                                        </div>
+                                        <div className="widget-subheading">
+                                            VP People Manager
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div className="header-btn-lg">
                             <button type="button" className="hamburger hamburger--elastic open-right-drawer">
                                 <span className="hamburger-box">

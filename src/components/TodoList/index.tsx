@@ -40,6 +40,13 @@ export default class TodoList extends Component<Props> {
                         <div className="scroll-area-lg">
                             <div className="scrollbar-container">
                                 <div className="p-2">
+                                    {/* Разбиение по группам */}
+                                    {/* <div className="todo-list-group">
+                                        <div className="todo-list-group__name">
+                                            <div className="swatch-holder swatch-holder-sm bg-grow-early"></div>
+                                            <strong>In progress</strong>
+                                        </div>
+                                    </div> */}
                                     <ul className="todo-list-wrapper list-group list-group-flush">
                                         {listItems}
                                     </ul>
