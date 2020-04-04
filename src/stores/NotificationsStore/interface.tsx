@@ -4,7 +4,7 @@ export interface INotificationsStore {
     getNotifications: Function,
     getNotification: Function,
     getNotificationIDs: Function,
-    removeNotification: Function
+    removeNotification: Function,
 }
 
 export interface INotificationList {

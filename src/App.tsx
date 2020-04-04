@@ -7,6 +7,13 @@ import LeftSidebar from './components/LeftSidebar';
 import RightContent from './components/RightContent';
 import './css/main.css';
 import Notifications from './components/Notifications';
+import {
+  Switch,
+  Route,
+} from "react-router-dom";
+import TodoList from './components/TodoList';
+import TodoForm from './components/TodoForm';
+import HomePage from 'components/HomePage';
 
 function App() {
   return (
@@ -16,7 +23,14 @@ function App() {
         <Notifications />
         <div className="app-main">
           <LeftSidebar />
-          <RightContent />
+          <RightContent >
+            <Switch>
+              <Route path="/" exact component={HomePage} />
+              <Route path="/todo-list" exact component={TodoList} />
+              <Route path="/todo-list/create-todo" exact component={TodoForm} />
+              <Route path="/todo-list/:todoId" exact component={TodoForm} />
+            </Switch>
+          </RightContent>
         </div>
       </div>
     </Router>

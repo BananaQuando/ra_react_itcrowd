@@ -30,7 +30,7 @@ export default class NotificationStore implements INotificationsStore {
         }
     }
 
-    getNotification(notificationID: string) {
+    @action getNotification(notificationID: string) {
         return this.notificationList[notificationID];
     }
 

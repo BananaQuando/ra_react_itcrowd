@@ -38,17 +38,17 @@ export default class TodoForm extends Component<Props> {
     }
 
     @action setChanged = () => {
-		this.changed = true;
-	}
+        this.changed = true;
+    }
 
     getInputValue = async (inputName: string) => {
 
-		const { id } = this.todoItem;
+        const { id } = this.todoItem;
 
-		const data = await this.props.inputDataStore!.getInputDataStore(`todo_${id}_${inputName}`);
+        const data = await this.props.inputDataStore!.getInputDataStore(`todo_${id}_${inputName}`);
 
-		return data.inputContent;
-	}
+        return data.inputContent;
+    }
 
     @action saveForm = async () => {
         this.todoItem.title = await this.getInputValue("title");
@@ -60,7 +60,7 @@ export default class TodoForm extends Component<Props> {
             id: this.todoItem.id,
             text: `Задача #${this.todoItem.id} успешно сохранена`,
             type: "toast-success",
-            duration: 2000
+            // duration: 2000
         });
     }
 
