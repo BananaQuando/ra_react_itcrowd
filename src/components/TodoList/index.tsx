@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { ITodo, IUserTodosId } from 'stores/TodoStore/interfaces';
 
 interface Props {
-    todoStore: TodoStore,
+    todoStore?: TodoStore,
 }
 
 @inject("todoStore")
@@ -19,7 +19,7 @@ export default class TodoList extends Component<Props> {
 
     @action async componentDidMount() {
         //  передавать id пользователей
-        this.userTodosID = await this.props.todoStore.getUserTodosID(2);
+        this.userTodosID = await this.props.todoStore!.getUserTodosID(2);
     }
 
     render() {
