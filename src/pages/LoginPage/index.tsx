@@ -1,6 +1,24 @@
 import React from 'react';
+import IUserStore from '../../stores/UserStore';
+import { observer, inject } from 'mobx-react';
 
-export default class LoginPage extends React.Component {
+interface Props {
+    userStore?: IUserStore
+}
+
+@inject("userStore")
+@observer
+export default class LoginPage extends React.Component<Props> {
+
+    // async componentDidMount() {
+    //     const data = {
+    //         email: "test@test.test",
+    //         password: "123123",
+    //     };
+
+    //     await this.props.userStore?.userLogin(data);
+    // }
+
     render() {
         return (
             <div className="h-100">
@@ -54,8 +72,9 @@ export default class LoginPage extends React.Component {
                                     <div className="position-relative form-check"><input name="check" id="exampleCheck" type="checkbox" className="form-check-input" /><label htmlFor="exampleCheck" className="form-check-label">Keep me logged in</label></div>
                                     <div className="divider row"></div>
                                     <div className="d-flex align-items-center">
-                                        <div className="ml-auto"><a href="javascript:void(0);" className="btn-lg btn btn-link">Recover Password</a>
-                                            <button className="btn btn-primary btn-lg">Login to Dashboard</button>
+                                        <div className="ml-auto">
+                                            {/* <a href="javascript:void(0);" className="btn-lg btn btn-link">Recover Password</a> */}
+                                            <button className="btn btn-primary btn-lg">Login to ITCrowd</button>
                                         </div>
                                     </div>
                                 </form>
