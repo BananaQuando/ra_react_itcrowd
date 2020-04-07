@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import TodoListItem from '../TodoListItem';
-import TodoStore from '../../stores/TodoStore';
 import { inject, observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 import { Link } from 'react-router-dom';
-import { ITodo, IUserTodosId } from 'stores/TodoStore/interfaces';
+import { ITodoStore } from 'stores/TodoStore/interfaces';
+import { IUserStore } from 'stores/UserStore/interface';
 
 interface Props {
-    todoStore?: TodoStore,
+    todoStore?: ITodoStore,
+    userStore?: IUserStore
 }
 
-@inject("todoStore")
+@inject("todoStore", "userStore")
 @observer
 export default class TodoList extends Component<Props> {
 
@@ -19,7 +20,9 @@ export default class TodoList extends Component<Props> {
 
     @action async componentDidMount() {
         //  передавать id пользователей
-        this.userTodosID = await this.props.todoStore!.getUserTodosID(2);
+        this.userTodosID = await this.props.todoStore!.getUserTodosID(
+            this.props.userStore!.currentUser.id
+        );
     }
 
     render() {

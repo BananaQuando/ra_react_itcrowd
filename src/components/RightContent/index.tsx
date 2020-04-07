@@ -5,7 +5,7 @@ export default class RightContent extends Component {
         return (
             <div className="app-main__outer">
                 <div className="app-main__inner">
-                    { this.props.children }
+                    {this.props.children}
                 </div>
             </div>
         );

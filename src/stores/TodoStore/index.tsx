@@ -8,7 +8,7 @@ export default class TodoStore implements ITodoStore {
 
     @action async getAllTodos() {
         console.log(`getAllTodos() from request`);
-        const response = await fetch("http://127.0.0.1:8000/api/tasks");
+        const response = await fetch("http://wf.quando.pro/api/tasks");
 
         const todos = await response.json();
         if (todos) {
@@ -25,7 +25,7 @@ export default class TodoStore implements ITodoStore {
     async requestGetUserTodos(userID: number) {
         this.userTodosId[userID] = [] as number[];
         console.log(`return userTodos from request`);
-        const response = await fetch(`http://127.0.0.1:8000/api/tasks?user_id=${userID}`);
+        const response = await fetch(`http://wf.quando.pro/api/tasks?user_id=${userID}`);
         const data = await response.json();
 
         data.forEach(async (el: ITodo) => {
@@ -77,7 +77,7 @@ export default class TodoStore implements ITodoStore {
             return this.todoList[todoID];
         } else {
             console.log('return TodoItem from request');
-            const request = await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`);
+            const request = await fetch(`http://wf.quando.pro/api/tasks/${todoID}`);
             const todo = this.formatTodoResponce(await request.json());
             this.todoList[todo.id] = todo;
             return this.todoList[todo.id];
@@ -85,7 +85,7 @@ export default class TodoStore implements ITodoStore {
     }
 
     @action async createTodo(userID: number) {
-        const request = await fetch(`http://127.0.0.1:8000/api/tasks/`, {
+        const request = await fetch(`http://wf.quando.pro/api/tasks/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,7 +104,7 @@ export default class TodoStore implements ITodoStore {
 
     @action async removeTodo(todoID?: number) {
         if (todoID) {
-            const request = await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`, {
+            const request = await fetch(`http://wf.quando.pro/api/tasks/${todoID}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ export default class TodoStore implements ITodoStore {
 
     @action async saveTodo(todoID?: number) {
         if (todoID) {
-            await fetch(`http://127.0.0.1:8000/api/tasks/${todoID}`, {
+            await fetch(`http://wf.quando.pro/api/tasks/${todoID}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'

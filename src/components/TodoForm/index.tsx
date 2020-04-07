@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { observable, action } from 'mobx';
 import { IInputDataStore } from 'stores/InputDataStore/interface';
 import { INotificationsStore } from 'stores/NotificationsStore/interface';
+import { IUserStore } from 'stores/UserStore/interface';
 
 interface RouteProps {
     todoId: string,
@@ -15,12 +16,13 @@ interface RouteProps {
 interface Props {
     todoStore?: ITodoStore,
     inputDataStore?: IInputDataStore,
-    notificationsStore?: INotificationsStore
+    notificationsStore?: INotificationsStore,
+    userStore?: IUserStore
 }
 
 interface Props extends RouteComponentProps<Props & RouteProps> { }
 
-@inject("todoStore", "inputDataStore", "notificationsStore")
+@inject("todoStore", "inputDataStore", "notificationsStore", "userStore")
 @observer
 export default class TodoForm extends Component<Props> {
 
@@ -33,7 +35,7 @@ export default class TodoForm extends Component<Props> {
         if (todoID) {
             this.todoItem = await this.props.todoStore!.getTodo(todoID);
         } else {
-            this.todoItem = await this.props.todoStore!.createTodo(2);
+            this.todoItem = await this.props.todoStore!.createTodo(this.props.userStore?.currentUser.id);
         }
     }
 
@@ -60,7 +62,7 @@ export default class TodoForm extends Component<Props> {
             id: this.todoItem.id,
             text: `Задача #${this.todoItem.id} успешно сохранена`,
             type: "toast-success",
-            // duration: 2000
+            duration: 2000
         });
     }
 

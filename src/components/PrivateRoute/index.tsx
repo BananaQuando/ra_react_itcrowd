@@ -4,6 +4,7 @@ import IUserStore from 'stores/UserStore';
 import { inject, observer } from 'mobx-react';
 import { RouteComponentProps } from 'react-router-dom';
 import { observable } from "mobx";
+import LoadingSpinner from "components/LoadingSpinner";
 
 interface Props {
     userStore?: IUserStore,
@@ -14,22 +15,14 @@ interface Props {
 @inject("userStore")
 @observer
 class PrivateRoute extends React.Component<Props> {
-    async componentDidMount(){
-        await this.props.userStore!.getProfileFetch();
-    }
-
     render() {
-        console.log(this.props.userStore!.isAuthenticated)
-
         const { component } = this.props;
         const { authChecked, isAuthenticated } = this.props.userStore!;
         const RenderComponent = component;
         if (authChecked){
-            console.log('authentificated')
             return isAuthenticated ? <RenderComponent {...this.props} /> : <Redirect to="/login" />
         }else{
-            console.log('not authentificated')
-            return <div>Loading....</div>
+            return <LoadingSpinner/>
         }
     }
 }

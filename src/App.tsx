@@ -19,6 +19,9 @@ interface Props {
 @observer
 class App extends React.Component<Props>{
 
+  async componentDidMount(){
+    await this.props.userStore!.getProfileFetch();
+  }
 
   render(){
     return (

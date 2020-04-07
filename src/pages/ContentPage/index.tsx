@@ -8,7 +8,7 @@ import Notifications from '../../components/Notifications';
 import { Switch, Route } from 'react-router-dom';
 
 export default class ContentPage extends React.Component {
-    render() { 
+    render() {
         return (
             <div className="app-container fixed-header fixed-sidebar body-tabs-shadow app-theme-white">
                 <Header />
