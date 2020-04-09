@@ -6,6 +6,7 @@ import HomePage from 'pages/ContentPage/HomePage';
 import TodoPage from 'pages/ContentPage/TodoPage';
 import Notifications from '../../components/Notifications';
 import { Switch, Route } from 'react-router-dom';
+import ProjectsPage from './ProjectsPage';
 
 export default class ContentPage extends React.Component {
     render() {
@@ -19,6 +20,7 @@ export default class ContentPage extends React.Component {
                         <Switch>
                             <Route path="/" exact component={HomePage} />
                             <Route path="/todo-list" component={TodoPage} />
+                            <Route path="/projects-list" component={ProjectsPage} />
                         </Switch>
                     </RightContent>
                 </div>
