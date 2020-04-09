@@ -13,7 +13,7 @@ export default class ProjectsPage extends React.Component {
                             </div>
                             <div>Projects list
                                 <div className="page-title-subheading">
-                                Basic example of a Bootstrap 4 table with sort, search and filter functionality.
+                                    Basic example of a Bootstrap 4 table with sort, search and filter functionality.
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,11 @@ export default class ProjectsPage extends React.Component {
                                                 <td>ITCrowd CMS</td>
                                                 <td>Pet project</td>
                                                 <td>3</td>
-                                                <td>4</td>
+                                                <td>
+                                                    <button className="border-0 btn-transition btn btn-outline-danger">
+                                                        <i className="fa fa-trash-alt"></i>
+                                                    </button>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
