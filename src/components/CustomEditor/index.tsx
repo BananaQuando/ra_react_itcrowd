@@ -51,11 +51,14 @@ export default class CustomEditor extends React.Component<Props> {
     }
 
     @action convertToState(content: any) {
+        if (content !== null) {
+            const contentBlock = htmlToDraft(content);
+            const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
 
-        const contentBlock = htmlToDraft(content);
-        const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+            return EditorState.createWithContent(contentState);
+        }
 
-        return EditorState.createWithContent(contentState);
+        return EditorState.createEmpty();
     }
 
     render() {

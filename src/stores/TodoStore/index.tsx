@@ -85,7 +85,7 @@ export default class TodoStore implements ITodoStore {
     }
 
     @action async createTodo(userID: number) {
-        const request = await fetch(`http://wf.quando.pro/api/tasks/`, {
+        const request = await fetch(`http://wf.quando.pro/api/tasks/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
