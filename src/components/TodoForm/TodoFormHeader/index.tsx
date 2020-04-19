@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ITodoValues, ITodoStore } from '../../stores/TodoStore/interfaces';
+import { ITodoValues, ITodoStore } from '../../../stores/TodoStore/interfaces';
 import { observable, action } from 'mobx';
 import { observer, inject } from 'mobx-react';
-import CustomTextInput from '../CustomTextInput';
+import CustomTextInput from '../../CustomTextInput';
 import { IInputDataStore } from 'stores/InputDataStore/interface';
 
 interface Props {

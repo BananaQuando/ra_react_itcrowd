@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import TodoListItem from '../TodoListItem';
+import TodoListItem from './TodoListItem';
 import { inject, observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 import { Link } from 'react-router-dom';

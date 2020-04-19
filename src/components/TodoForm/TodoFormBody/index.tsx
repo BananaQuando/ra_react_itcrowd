@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ITodo, ITodoStore, ITodoValues } from 'stores/TodoStore/interfaces';
-import { observable, action } from 'mobx';
+import { ITodoStore, ITodoValues } from 'stores/TodoStore/interfaces';
+import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import CustomEditor from '../CustomEditor';
+import CustomEditor from '../../CustomEditor';
 
 
 interface Props {

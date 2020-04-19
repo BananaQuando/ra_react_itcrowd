@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { ITodo, ITodoStore, ITodoValues } from '../../stores/TodoStore/interfaces';
 import { inject, observer } from 'mobx-react';
-import TodoFormHeader from '../TodoFormHeader';
-import TodoFormBody from '../TodoFormBody';
+import TodoFormHeader from './TodoFormHeader';
+import TodoFormBody from './TodoFormBody';
 import { RouteComponentProps } from 'react-router-dom';
 import { observable, action } from 'mobx';
 import { IInputDataStore } from 'stores/InputDataStore/interface';

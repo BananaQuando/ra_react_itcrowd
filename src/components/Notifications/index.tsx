@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { INotificationsStore, INotificationList } from 'stores/NotificationsStore/interface';
 import { inject, observer } from 'mobx-react';
-import Notification from '../Notification';
+import Notification from './Notification';
 import { observable, action } from 'mobx';
 
 interface Props {

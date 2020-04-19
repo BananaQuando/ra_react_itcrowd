@@ -1,5 +1,5 @@
 import React from 'react';
-import { IUserStore, IUserData } from '../../stores/UserStore/interface';
+import { IUserStore, IUserData } from '../../../stores/UserStore/interface';
 import { inject, observer } from 'mobx-react';
 import { observable, action } from 'mobx';
 

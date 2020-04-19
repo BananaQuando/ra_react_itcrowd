@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observable, action } from 'mobx';
-import { ITodo, ITodoStore } from '../../stores/TodoStore/interfaces';
+import { ITodo, ITodoStore } from '../../../stores/TodoStore/interfaces';
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 

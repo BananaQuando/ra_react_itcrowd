@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Breadcrumbs from '../Breadcrumbs';
-import HeaderProfile from '../HeaderProfile';
+import HeaderProfile from './HeaderProfile';
 import { IUserStore } from 'stores/UserStore/interface';
 import { inject, observer } from 'mobx-react';
 
