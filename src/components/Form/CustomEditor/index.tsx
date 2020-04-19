@@ -5,7 +5,7 @@ import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import htmlToDraft from 'html-to-draftjs';
-import { IInputDataStore, IInputDataItem } from '../../stores/InputDataStore/interface';
+import { IInputDataStore, IInputDataItem } from '../../../stores/InputDataStore/interface';
 
 interface Props {
     editorID: string | number,

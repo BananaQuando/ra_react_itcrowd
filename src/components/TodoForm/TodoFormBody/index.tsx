@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ITodoStore, ITodoValues } from 'stores/TodoStore/interfaces';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import CustomEditor from '../../CustomEditor';
+import CustomEditor from '../../Form/CustomEditor';
 
 
 interface Props {
