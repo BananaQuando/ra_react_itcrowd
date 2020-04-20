@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default class LeftSidebar extends Component {
     render() {
         return (
-            <div className="app-sidebar sidebar-shadow bg-happy-green sidebar-text-light">
+            <div className="app-sidebar sidebar-shadow bg-vicious-stance sidebar-text-light">
                 <div className="app-header__logo">
                     <div className="logo-src"></div>
                     <div className="header__pane ml-auto">
